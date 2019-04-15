@@ -1,35 +1,38 @@
-#page-container {
-  display: block;
+#main-page-container {
+  position: absolute;
+  align-self: center;
 }
 
-#word-submit-confirm {
-  display: block;
-  margin: 1em;
+#game-clock, #word-submit-confirm {
+ display: block;
+ margin: 1em;
+}
 
+#play-button {
+  position: absolute;
+  width: 20%;
+  height: 4em;
+  align-self: center;
+  margin-left: 30%;
 }
 
 #game-container {
   background: lightblue;
   position: relative;
   margin: 1em;
-  /* margin: auto;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0; */
-  width: 32em;
+  width: 52em;
   height: 32em;
   display: flex;
   flex-wrap: wrap-reverse;
 }
 
 .letter-tile {
-  width: 3em;
-  height: 3em;
+  width: 4em;
+  height: 4em;
   margin: 0.5em;
   background: white;
   text-align: center;
-  line-height: 3em;
+  line-height: 4em;
   font-weight: bold;
   border-radius: 5em;
 }
@@ -45,11 +48,8 @@
   border-radius: 5em;
 }
 
-#form-div {
+#word-input-field {
   position: relative;
   margin: 1em;
-}
-
-#word-input-field {
-  width: 32em;
+  width: 52em;
 }
