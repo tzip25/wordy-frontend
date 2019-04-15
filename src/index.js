@@ -22,13 +22,21 @@ window.addEventListener('DOMContentLoaded', e => {
 
     //change letter tile color to yellow when user input matches letter
     const userInput = e.target.value
-    userInput.split("").forEach(letter => {
-      let letterTile = document.querySelector(`[data-id = '${letter}']`)
-      // console.log(letterTile);
+    inputArray = userInput.split("")
+
+    const letterCounter = {}
+    inputArray.forEach(letter => {
+      if (letterCounter[letter]){ letterCounter[letter]+=1
+      } else {
+        letterCounter[letter] = 1
+      }
+      let letterTile = document.querySelectorAll(`[data-id = '${letter}']`)[letterCounter[letter]-1]
       if(letterTile) {
         letterTile.style.background = "yellow"
       }
+
     })
+    console.log(letterCounter)
   })
 
   //event listener for user submit word
@@ -54,7 +62,7 @@ window.addEventListener('DOMContentLoaded', e => {
     if (gameContainer.children.length === 64){
       clearInterval(gameRunner)
     }
-  }, 400)
+  }, 1000)
 
 
 
