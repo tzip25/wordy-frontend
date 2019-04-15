@@ -2,7 +2,10 @@ window.addEventListener('DOMContentLoaded', e => {
 
   const gameContainer = document.querySelector("#game-container")
   const wordForm = document.querySelector("#input-form")
+  const wordInputField = document.querySelector("#word-input-field")
   const wordSubConfirm = document.querySelector('#word-submit-confirm')
+  const gameClock = document.querySelector("#game-clock")
+  const playButton = document.querySelector("#play-button")
 
   // adapter.getUsers()
   // // .then(users => {
@@ -41,34 +44,42 @@ window.addEventListener('DOMContentLoaded', e => {
   })
 
   //event listener for user submit word
-  wordForm.addEventListener("submit", e=> {
-    e.preventDefault()
-    const wordSubmit = e.target.children[0].value
+   wordForm.addEventListener("submit", submitListener)
 
-    let word = ""
-    let highlitedLetters = document.querySelectorAll(".highlited")
-    highlitedLetters.forEach(letter => {
-      word += letter.innerText
-    })
-    //sorted word from highlited
-    const sortedWord = word.split('').sort()
-    //sorted word from user input
-    const sortedWordSubmit = wordSubmit.split('').sort()
+function submitListener(e){
+  e.preventDefault()
+  const wordSubmit = e.target.children[0].value
 
-    if(sortedWord.join('') === sortedWordSubmit.join('')){
-      highlitedLetters.forEach(letter => {
-        gameContainer.removeChild(letter)
-        wordSubConfirm.innerText = `"${wordSubmit}" submitted`
-        wordForm.reset()
-      })
-    } else {
-        highlitedLetters.forEach(letter => {
-        wordSubConfirm.innerText = "Invalid word!"
-      })
-    }
-
+  let word = ""
+  let highlitedLetters = document.querySelectorAll(".highlited")
+  highlitedLetters.forEach(letter => {
+    word += letter.innerText
   })
+  //sorted word from highlited
+  const sortedWord = word.split('').sort()
+  //sorted word from user input
+  const sortedWordSubmit = wordSubmit.split('').sort()
 
+  if(sortedWord.join('') === sortedWordSubmit.join('')){
+    highlitedLetters.forEach(letter => {
+      gameContainer.removeChild(letter)
+      wordSubConfirm.innerText = `"${wordSubmit}" submitted`
+      wordForm.reset()
+    })
+  } else {
+    highlitedLetters.forEach(letter => {
+      wordSubConfirm.innerText = "Invalid word!"
+    })
+  }
+}
+
+playButton.addEventListener('click', ev => {
+  wordInputField.disabled = false
+  wordInputField.style.background = "white"
+  gameContainer.innerHTML = ""
+  startPlay()
+  ev.target.style.display = "none"
+})
 
   function randomizeLetters(){
     const lettersArray = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
@@ -82,12 +93,30 @@ window.addEventListener('DOMContentLoaded', e => {
   }
 
 
+
+function startPlay() {
+  gameClock.innerText = "Time: 0"
+  let clockCounter = 0
+  const gameTime = setInterval(gameClockFunction, 1000)
+  function gameClockFunction(){
+     ++clockCounter
+     gameClock.innerText = "Time: " + clockCounter
+  }
   let gameRunner = setInterval(function(){
     randomizeLetters()
     if (gameContainer.children.length === 64){
       clearInterval(gameRunner)
+      clearInterval(gameTime)
+      console.log(gameClock.innerText)
+       wordInputField.value = ""
+       wordInputField.disabled = true
+       wordInputField.style.background = "lightgray"
+       playButton.style.display = "block"
     }
-  }, 1000)
+  }, 0.00001)
+}
+
+
 
 
 
