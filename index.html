@@ -11,26 +11,48 @@
   </head>
   <body>
 
-      <div id ="game-clock">
-        Time: 0
+
+    <div class="ui bottom attached segment pushable">
+      <div class="ui visible inverted left vertical sidebar menu">
+        <a class="item">
+          <i class="game icon"></i>
+          Game
+        </a>
+        <a class="item">
+          <i class="block layout icon"></i>
+          Rules
+        </a>
+        <a class="item">
+          <i class="smile icon"></i>
+          My Stats
+        </a>
+        <a class="item">
+          <i class="block layout icon"></i>
+          Leaderboard
+        </a>
+      </div>
+      <div class="pusher">
+
+        <div id="main-page-container" class="ui basic segment">
+
+            <div class="ui header right floated segment" id ="game-clock">Time: 0</div>
+            <div class="ui header right floated segment" id ="game-clock">Score: 0</div>
+
+            <div class="ui raised segment" id="game-container">
+              <button id="play-button" class="ui button">PLAY</button>
+            </div>
+            <div class="ui input" id="form-div">
+              <form autocomplete="off" id="input-form" class="" action="index.html" method="post">
+                <input id="word-input-field" type="text" name="" value="">
+              </form>
+            </div>
+            <br>
+            <div id="word-submit-confirm"></div>
+          </div>
       </div>
 
+    </div>
 
-          <div id="game-container">
-          </div>
-
-          <div class="ui input" id="form-div">
-            <form autocomplete="off" id="input-form" class="" action="index.html" method="post">
-              <input id="word-input-field" type="text" name="" value="">
-            </form>
-          </div>
-
-            <br>
-
-            <div id="word-submit-confirm">
-            </div>
-
-            <button id="play-button" class="ui button">PLAY WordyGame</button>
 
 
 

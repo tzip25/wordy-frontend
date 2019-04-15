@@ -82,7 +82,7 @@ playButton.addEventListener('click', ev => {
 })
 
   function randomizeLetters(){
-    const lettersArray = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+    const lettersArray = ['a','a', 'a', 'e', 'e', 'i', 'i', 'o', 'o', 'u', 'u', 'b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
     let randomIndex = Math.floor(Math.random()*26)
     let letterDiv = document.createElement("div")
     letterDiv.dataset.action = "falling-letter"
@@ -104,7 +104,7 @@ function startPlay() {
   }
   let gameRunner = setInterval(function(){
     randomizeLetters()
-    if (gameContainer.children.length === 64){
+    if (gameContainer.children.length === 60){
       clearInterval(gameRunner)
       clearInterval(gameTime)
       console.log(gameClock.innerText)
@@ -113,7 +113,7 @@ function startPlay() {
        wordInputField.style.background = "lightgray"
        playButton.style.display = "block"
     }
-  }, 0.00001)
+  }, 200)
 }
 
 
