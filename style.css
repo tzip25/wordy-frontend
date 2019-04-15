@@ -1,5 +1,15 @@
+#page-container {
+  display: block;
+}
+
+#word-submit-confirm {
+  display: block;
+  margin: 1em;
+
+}
+
 #game-container {
-  background: green;
+  background: lightblue;
   position: relative;
   margin: 1em;
   /* margin: auto;
@@ -19,7 +29,20 @@
   margin: 0.5em;
   background: white;
   text-align: center;
-  line-height: 2.5em;
+  line-height: 3em;
+  font-weight: bold;
+  border-radius: 5em;
+}
+
+.highlited {
+  width: 3em;
+  height: 3em;
+  margin: 0.5em;
+  background: yellow;
+  text-align: center;
+  line-height: 3em;
+  font-weight: bold;
+  border-radius: 5em;
 }
 
 #form-div {
