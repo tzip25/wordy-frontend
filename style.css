@@ -1,0 +1,23 @@
+#game-container {
+  background: green;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 32em;
+  height: 32em;
+  display:flex;
+  flex-wrap: wrap-reverse;
+}
+
+.letter-tile {
+  width: 3em;
+  height: 3em;
+  margin: 0.5em;
+  background: white;
+  text-align: center;
+  line-height: 2.5em;
+
+}
