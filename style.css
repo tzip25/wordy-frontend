@@ -1,14 +1,15 @@
 #game-container {
   background: green;
-  position: absolute;
-  margin: auto;
+  position: relative;
+  margin: 1em;
+  /* margin: auto;
   top: 0;
   right: 0;
   bottom: 0;
-  left: 0;
+  left: 0; */
   width: 32em;
   height: 32em;
-  display:flex;
+  display: flex;
   flex-wrap: wrap-reverse;
 }
 
@@ -19,5 +20,13 @@
   background: white;
   text-align: center;
   line-height: 2.5em;
+}
 
+#form-div {
+  position: relative;
+  margin: 1em;
+}
+
+#word-input-field {
+  width: 32em;
 }
