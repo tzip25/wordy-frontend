@@ -9,6 +9,7 @@
 }
 
 #play-button {
+  z-index: 7;
   position: absolute;
   width: 20%;
   height: 4em;
