@@ -15,12 +15,8 @@ window.addEventListener('DOMContentLoaded', e => {
   let username;
   let signedIn = false;
   let scoreMult = 1;
+  let gameWordsArray = [];
 
-  // adapter.getUsers()
-  // // .then(users => {
-  // //   // users.forEach(user => {
-  // //   // })
-  // // })
 
 
       //event listener for user input - matching letters to tiles
@@ -71,7 +67,7 @@ window.addEventListener('DOMContentLoaded', e => {
       const sortedWordSubmit = wordSubmit.split('').sort()
 
       if(sortedWord.join('') === sortedWordSubmit.join('')){
-
+         gameWordsArray.push(wordSubmit)
         scoreCalculator(wordSubmit)
         highlitedLetters.forEach(letter => {
           gameContainer.removeChild(letter)
@@ -112,7 +108,7 @@ window.addEventListener('DOMContentLoaded', e => {
 
     function startPlay() {
       rightContainer.innerText = ""
-
+      gameWordsArray = []
       gameClock.innerText = "0"
       gameScore.innerText = "0"
       let clockCounter = 0
@@ -130,8 +126,18 @@ window.addEventListener('DOMContentLoaded', e => {
            wordInputField.disabled = true
            wordInputField.style.background = "lightgray"
            playButton.style.display = "block"
+           const longestWord = gameWordsArray.sort(function(a, b) {
+             return b.length - a.length
+           })[0]
+           let finalClock = gameClock.innerHTML
+           let finalScore = gameScore.innerHTML
+           const body = {username: username, score: finalScore, longest_word: longestWord, time: finalClock}
+           adapter.createGame(body)
+
+
+
         }
-      }, 700)
+      }, 300)
     }
 
     function scoreCalculator(word){

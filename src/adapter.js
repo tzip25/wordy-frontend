@@ -16,4 +16,13 @@ const adapter = {
     .then(res => res.json())
   },
 
+  createGame: (body) => {
+    return fetch(`${URL}/games`, {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body)
+    })
+    .then(res => res.json())
+  },
+
 }
