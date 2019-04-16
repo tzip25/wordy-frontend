@@ -1,10 +1,4 @@
-#main-page-container {
-  /* background: yellow; */
-  position: absolute;
-  align-self: center;
-}
-
-#game-clock, #word-submit-confirm {
+#game-clock-div, #game-score-div, #word-submit-confirm {
  display: block;
  margin: 1em;
 }
@@ -19,12 +13,12 @@
 
 #game-container {
   background: lightblue;
-  position: relative;
   margin: 1em;
   width: 52em;
   height: 32em;
   display: flex;
   flex-wrap: wrap-reverse;
+  clear: left;
 }
 
 .letter-tile {
