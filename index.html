@@ -15,16 +15,16 @@
     <div class="ui bottom attached segment pushable">
       <div class="ui visible inverted left vertical sidebar menu">
         <a class="item">
-          <i class="game icon"></i>
+          <i id="game-icon" class="game icon"></i>
           Game
         </a>
         <a class="item">
           <i class="info icon"></i>
           Rules
         </a>
-        <a class="item">
+        <a id="user-icon" class="item">
           <i class="smile icon"></i>
-          My Stats
+          Login
         </a>
         <a class="item">
           <i class="block layout icon"></i>
@@ -35,6 +35,7 @@
       <div class="pusher">
             <div class="ui header floated segment" id ="game-clock-div">Time: <span id="game-clock">0</span></div>
             <div class="ui header floated segment" id ="game-score-div">Score: <span id="game-score">0</span></div>
+            <div id="right-container" class="">HERE</div>
 
             <div class="ui segment" id="game-container"></div>
             <button id="play-button" class="ui button positive basic"><i class="icon play"></i>PLAY</button>
@@ -45,7 +46,9 @@
             </div>
             <br>
             <div id="word-submit-confirm"></div>
+
       </div>
+
 
     </div>
 

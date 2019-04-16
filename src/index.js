@@ -8,19 +8,16 @@ window.addEventListener('DOMContentLoaded', e => {
   const playButton = document.querySelector("#play-button")
   const userIcon = document.querySelector("#user-icon")
   const gameIcon = document.querySelector("#game-icon")
+  const rightContainer = document.querySelector("#right-container")
+
+  let signedIn = false;
   let scoreMult = 1;
-
-
-
-
-
 
   // adapter.getUsers()
   // // .then(users => {
   // //   // users.forEach(user => {
   // //   // })
   // // })
-
 
 
       //event listener for user input - matching letters to tiles
@@ -125,7 +122,7 @@ window.addEventListener('DOMContentLoaded', e => {
            wordInputField.style.background = "lightgray"
            playButton.style.display = "block"
         }
-      }, 1000)
+      }, 10)
     }
 
     function scoreCalculator(word){
@@ -137,6 +134,37 @@ window.addEventListener('DOMContentLoaded', e => {
 
 
     userIcon.addEventListener('click', ev => {
+
+      if(signedIn){
+        rightContainer.innerHTML = ""
+      } else {
+      rightContainer.innerHTML =
+        `
+        <div class="ui input" id="login-form-div">
+        <form autocomplete="off" id="login-form" class="" action="index.html" method="post">
+          <h3>Login:</h3>
+          <input id="login-field" type="text" name="" value="" placeholder="username">
+          <br><br>
+          <input type="submit">
+        </form>
+        </div>
+        `
+        const loginForm = document.querySelector("#login-form")
+        loginForm.addEventListener('submit', e=> {
+          e.preventDefault()
+          let user = document.querySelector("#login-field").value
+          let body = {username: user}
+          adapter.createUser(body).then(res=> {
+          signedIn = true;
+          rightContainer.innerHTML =
+          `
+          <h3>Welcome ${user.toUpperCase()}</h3>
+          `
+          })
+
+        });
+
+      }
 
     })
 
