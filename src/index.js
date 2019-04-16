@@ -113,7 +113,7 @@ function startPlay() {
        wordInputField.style.background = "lightgray"
        playButton.style.display = "block"
     }
-  }, 20)
+  }, 50)
 }
 
 
