@@ -1,4 +1,5 @@
 #main-page-container {
+  /* background: yellow; */
   position: absolute;
   align-self: center;
 }
@@ -9,12 +10,11 @@
 }
 
 #play-button {
-  z-index: 7;
-  position: absolute;
-  width: 20%;
-  height: 4em;
+  position: relative;
+  margin-left: 1em;
+  width: 52em;
+  height: 100%;
   align-self: center;
-  margin-left: 30%;
 }
 
 #game-container {
