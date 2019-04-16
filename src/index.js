@@ -94,8 +94,8 @@ window.addEventListener('DOMContentLoaded', e => {
     })
 
       function randomizeLetters(){
-        const lettersArray = ['a','a', 'a', 'e', 'e', 'i', 'i', 'o', 'o', 'u', 'u', 'b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-        let randomIndex = Math.floor(Math.random()*26)
+        const lettersArray = ['e','e','e','e','e','e','e','e','e','e','e','a','a','a','a','a','a','a','a','r','r','r','r','r','r','r','r','i','i','i','i','i','i','i','i','o','o','o','o','o','o','o','t','t','t','t','t','t','t','n','n','n','n','n','n','n','s','s','s','s','s','s','l','l','l','l','l','c','c','c','c','c','u','u','u','u','d','d','d','p','p','p','m','m','m','h','h','h','g','g','b','b','f','f','y','y','w','k','v','x','z','j','q'];
+        let randomIndex = Math.floor(Math.random()*103)
         let letterDiv = document.createElement("div")
         letterDiv.dataset.action = "falling-letter"
         letterDiv.className = "letter-tile"
@@ -193,27 +193,31 @@ window.addEventListener('DOMContentLoaded', e => {
           const wordArr = []
 
           currentUser.games.forEach(game => {
-            scoreArr.push(game.score)
-            timeArr.push(game.time)
+            scoreArr.push(parseInt(game.score))
+            timeArr.push(parseInt(game.time))
             wordArr.push(game.longest_word)
           })
 
-          scoreArr.sort().reverse().slice(0,2).forEach(score => {
+          scoreArr.sort(function(a, b){return b-a}).slice(0,3).forEach(score => {
             const gameScores = document.querySelector('#high-scores')
             gameScores.innerHTML += `<p>${score}</p>`
           })
 
-          timeArr.sort().reverse().slice(0,2).forEach(time => {
+          timeArr.sort(function(a, b){return b-a}).slice(0,3).forEach(time => {
             const gameLengths = document.querySelector('#longest-games')
-            gameLengths.innerHTML += `<p>${time}</p>`
+            gameLengths.innerHTML += `<p>${time} seconds</p>`
           })
 
           wordArr.sort(function(a, b) {
             return b.length - a.length
           })
 
-          const wordLengths = document.querySelector('#longest-word')
-          wordLengths.innerHTML += `<p>${wordArr[0]}</p>`
+
+          if (wordArr[0]) {
+            const wordLengths = document.querySelector('#longest-word')
+            wordLengths.innerHTML += `<p>${wordArr[0]}</p>`
+          }
+
 
       })
     }
