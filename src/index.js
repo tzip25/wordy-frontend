@@ -9,7 +9,10 @@ window.addEventListener('DOMContentLoaded', e => {
   const userIcon = document.querySelector("#user-icon")
   const gameIcon = document.querySelector("#game-icon")
   const rightContainer = document.querySelector("#right-container")
+  const loginForm = document.querySelector("#login-form")
+  const loginFormDiv = document.querySelector("#login-form-div")
 
+  let username;
   let signedIn = false;
   let scoreMult = 1;
 
@@ -68,16 +71,20 @@ window.addEventListener('DOMContentLoaded', e => {
       const sortedWordSubmit = wordSubmit.split('').sort()
 
       if(sortedWord.join('') === sortedWordSubmit.join('')){
+
         scoreCalculator(wordSubmit)
         highlitedLetters.forEach(letter => {
           gameContainer.removeChild(letter)
-          wordSubConfirm.innerText = `"${wordSubmit}" submitted`
+
+          rightContainer.innerHTML =
+          `<h1>${wordSubmit}</h1>`
+
           wordForm.reset()
 
         })
       } else {
         highlitedLetters.forEach(letter => {
-          wordSubConfirm.innerText = "Invalid word!"
+          rightContainer.innerHTML = `<h1>Invalid Word</h1>`
         })
       }
     }
@@ -104,6 +111,8 @@ window.addEventListener('DOMContentLoaded', e => {
 
 
     function startPlay() {
+      rightContainer.innerText = ""
+
       gameClock.innerText = "0"
       gameScore.innerText = "0"
       let clockCounter = 0
@@ -122,7 +131,7 @@ window.addEventListener('DOMContentLoaded', e => {
            wordInputField.style.background = "lightgray"
            playButton.style.display = "block"
         }
-      }, 10)
+      }, 700)
     }
 
     function scoreCalculator(word){
@@ -132,40 +141,77 @@ window.addEventListener('DOMContentLoaded', e => {
         gameScore.innerText = parsedScore
     }
 
-
     userIcon.addEventListener('click', ev => {
-
       if(signedIn){
-        rightContainer.innerHTML = ""
+        userStats()
       } else {
+        rightContainer.appendChild(loginFormDiv)
+      }
+    })
+
+    loginForm.addEventListener('submit', e=> {
+      e.preventDefault()
+      let user = document.querySelector("#login-field").value
+      let body = {username: user}
+      adapter.createUser(body).then(res=> {
+        signedIn = true;
+        username = user
+        userStats()
+      })
+    });
+
+    function userStats() {
+      userIcon.innerHTML = `<i class="smile icon"></i> My Stats`
+
       rightContainer.innerHTML =
-        `
-        <div class="ui input" id="login-form-div">
-        <form autocomplete="off" id="login-form" class="" action="index.html" method="post">
-          <h3>Login:</h3>
-          <input id="login-field" type="text" name="" value="" placeholder="username">
-          <br><br>
-          <input type="submit">
-        </form>
-        </div>
-        `
-        const loginForm = document.querySelector("#login-form")
-        loginForm.addEventListener('submit', e=> {
-          e.preventDefault()
-          let user = document.querySelector("#login-field").value
-          let body = {username: user}
-          adapter.createUser(body).then(res=> {
-          signedIn = true;
-          rightContainer.innerHTML =
-          `
-          <h3>Welcome ${user.toUpperCase()}</h3>
-          `
+      `<h2>Welcome ${username.toUpperCase()}</h2>
+
+      <h3>Your High Scores:</h3>
+      <span id="high-scores"></span>
+
+      <h3>Your Longest Games:</h3>
+      <span id="longest-games"></span>
+
+      <h3>Your Longest Word:</h3>
+      <span id="longest-word"></span>
+      `
+
+      adapter.getUsers().then(users => {
+
+          const currentUser = users.find(user => {
+            return user.username === username
           })
 
-        });
+          const scoreArr = []
+          const timeArr = []
+          const wordArr = []
 
-      }
+          currentUser.games.forEach(game => {
+            scoreArr.push(game.score)
+            timeArr.push(game.time)
+            wordArr.push(game.longest_word)
+          })
 
-    })
+          scoreArr.sort().reverse().slice(0,2).forEach(score => {
+            const gameScores = document.querySelector('#high-scores')
+            gameScores.innerHTML += `<p>${score}</p>`
+          })
+
+          timeArr.sort().reverse().slice(0,2).forEach(time => {
+            const gameLengths = document.querySelector('#longest-games')
+            gameLengths.innerHTML += `<p>${time}</p>`
+          })
+
+          wordArr.sort(function(a, b) {
+            return b.length - a.length
+          })
+
+          const wordLengths = document.querySelector('#longest-word')
+          wordLengths.innerHTML += `<p>${wordArr[0]}</p>`
+
+      })
+    }
+
+
 
 });

@@ -18,7 +18,7 @@
   height: 32em;
   display: flex;
   flex-wrap: wrap-reverse;
-  clear: left;
+  /* clear: left; */
 }
 
 .letter-tile {
@@ -51,10 +51,15 @@
   width: 52em;
 }
 
+#left-container {
+  float: left;
+  width: 54em;
+}
+
 #right-container {
-  position: relative;
-  left: 36.5em;
-  top: 8em;
+  float: left;
+  margin-left: 1em;
+  margin-top: 7em;
 }
 
 #login-field {

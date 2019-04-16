@@ -3,7 +3,7 @@ const URL = "http://localhost:3000/api/v1"
 const adapter = {
 
   getUsers: () => {
-    return fetch(URL)
+    return fetch(`${URL}/users`)
     .then(res=>res.json())
   },
 
