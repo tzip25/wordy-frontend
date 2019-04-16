@@ -128,9 +128,13 @@ window.addEventListener('DOMContentLoaded', e => {
            wordInputField.disabled = true
            wordInputField.style.background = "lightgray"
            playButton.style.display = "block"
-           const longestWord = gameWordsArray.sort(function(a, b) {
-             return b.length - a.length
-           })[0]
+           let longestWord;
+           if (gameWordsArray[0]) {
+               longestWord = gameWordsArray.sort(function(a, b) {
+                 return b.length - a.length
+               })[0]
+              }
+          else {longestWord = ""}
            let finalClock = gameClock.innerHTML
            let finalScore = gameScore.innerHTML
            const body = {username: username, score: finalScore, longest_word: longestWord, time: finalClock}
