@@ -8,15 +8,17 @@ window.addEventListener('DOMContentLoaded', e => {
   const playButton = document.querySelector("#play-button")
   const userIcon = document.querySelector("#user-icon")
   const gameIcon = document.querySelector("#game-icon")
+  const leaderboardIcon = document.querySelector("#leaderboard-icon")
   const rightContainer = document.querySelector("#right-container")
   const loginForm = document.querySelector("#login-form")
   const loginFormDiv = document.querySelector("#login-form-div")
+
+
 
   let username;
   let signedIn = false;
   let scoreMult = 1;
   let gameWordsArray = [];
-
 
 
       //event listener for user input - matching letters to tiles
@@ -134,8 +136,6 @@ window.addEventListener('DOMContentLoaded', e => {
            const body = {username: username, score: finalScore, longest_word: longestWord, time: finalClock}
            adapter.createGame(body)
 
-
-
         }
       }, 300)
     }
@@ -151,8 +151,14 @@ window.addEventListener('DOMContentLoaded', e => {
       if(signedIn){
         userStats()
       } else {
+
+        rightContainer.innerHTML = ""
         rightContainer.appendChild(loginFormDiv)
       }
+    })
+
+    leaderboardIcon.addEventListener('click', ev=> {
+      LeaderboardStats()
     })
 
     loginForm.addEventListener('submit', e=> {
@@ -161,6 +167,7 @@ window.addEventListener('DOMContentLoaded', e => {
       let body = {username: user}
       adapter.createUser(body).then(res=> {
         signedIn = true;
+        playButton.disabled = false
         username = user
         userStats()
       })
@@ -212,15 +219,84 @@ window.addEventListener('DOMContentLoaded', e => {
             return b.length - a.length
           })
 
-
           if (wordArr[0]) {
             const wordLengths = document.querySelector('#longest-word')
             wordLengths.innerHTML += `<p>${wordArr[0]}</p>`
           }
 
-
       })
     }
+
+
+    function LeaderboardStats() {
+      rightContainer.innerHTML =
+      `<h2>Leaderboard</h2>
+
+      <h3>Highest Scores:</h3>
+      <span id="high-scores"></span>
+
+      <h3>Legendary Words:</h3>
+      <span id="legendary-words"></span>
+      `
+
+      adapter.getUsers().then(users => {
+
+          const scoreObj = {}
+
+          users.forEach(user => {
+            user.games.forEach(game => {
+              if(scoreObj[game.score]){
+                scoreObj[game.score].push(user.username)
+              } else {
+                scoreObj[game.score] = []
+                scoreObj[game.score].push(user.username)
+              }
+            })
+          })
+
+          const highScores = document.querySelector('#high-scores')
+          const tempDiv = document.createElement('div')
+
+          const sorted = Object.keys(scoreObj).sort(function(a,b) {
+            return b-a
+          })
+
+          sorted.forEach(score => {
+            scoreObj[score].forEach(user => {
+              tempDiv.innerHTML += `<p>${user}: ${score}</p>`
+            })
+          })
+
+          const ps = tempDiv.querySelectorAll('p')
+          const tempArr = [...ps]
+
+          tempArr.slice(0,5).forEach(p => {
+            highScores.innerHTML += `<p>${p.innerText}</p>`
+          })
+
+
+          const wordArr = []
+          users.forEach(user=>{
+            user.games.forEach(game => {
+              wordArr.push(game.longest_word)
+            })
+          })
+
+          wordArr.sort(function(a, b) {
+            return b.length - a.length
+          })
+
+          if (wordArr[0]) {
+            const legendaryWords = document.querySelector('#legendary-words')
+            wordArr.slice(0,5).forEach(word=> {
+              legendaryWords.innerHTML += `<p>${word}</p>`
+            })
+          }
+
+      })
+
+      }
+
 
 
 
