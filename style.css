@@ -27,7 +27,9 @@
   margin: 0.5em;
   background: white;
   text-align: center;
+  font-size: 1em;
   line-height: 4em;
+  text-transform: uppercase;
   font-weight: bold;
   border-radius: 5em;
 }
@@ -47,4 +49,14 @@
   position: relative;
   margin: 1em;
   width: 52em;
+}
+
+#right-container {
+  position: relative;
+  left: 36.5em;
+  top: 8em;
+}
+
+#login-field {
+  width: 25em;
 }
