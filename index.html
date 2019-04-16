@@ -32,20 +32,33 @@
         </a>
       </div>
 
-      <div class="pusher">
+      <div id="pusher" class="pusher">
+
+        <div id="left-container">
             <div class="ui header floated segment" id ="game-clock-div">Time: <span id="game-clock">0</span></div>
             <div class="ui header floated segment" id ="game-score-div">Score: <span id="game-score">0</span></div>
-            <div id="right-container" class="">HERE</div>
-
             <div class="ui segment" id="game-container"></div>
             <button id="play-button" class="ui button positive basic"><i class="icon play"></i>PLAY</button>
             <div class="ui input" id="form-div">
-              <form autocomplete="off" id="input-form" class="" action="index.html" method="post">
+              <form autocomplete="off" id="input-form">
                 <input id="word-input-field" type="text" name="" value="">
               </form>
             </div>
             <br>
             <div id="word-submit-confirm"></div>
+        </div>
+
+        <!-- login form -->
+        <div id="right-container" class="column">
+          <div class="ui input" id="login-form-div">
+          <form autocomplete="off" id="login-form" class="" action="index.html" method="post">
+            <h3>Login to Play:</h3>
+            <input id="login-field" type="text" name="" value="" placeholder="username">
+            <br><br>
+            <input type="submit">
+          </form>
+          </div>
+        </div>
 
       </div>
 
