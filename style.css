@@ -1,35 +1,48 @@
-#game-clock-div, #game-score-div, #word-submit-confirm {
- display: block;
- margin: 1em;
+#game-score-div {
+  width: 7em;
+  display: block;
+  margin-top: 1em;
+}
+
+#game-clock-div {
+  width: 7em;
+  display: block;
+  margin-left: 2.4em;
+  margin-top: 1em;
+}
+
+#word-submit-confirm {
+  display: block;
+  margin-top: 1em;
 }
 
 #play-button {
   position: relative;
-  margin-left: 1em;
+  margin-left: 3em;
   width: 52em;
   height: 100%;
   align-self: center;
 }
 
 #game-container {
-  background: lightblue;
-  margin: 1em;
+  background: #eaeaea;
+  margin: 1em 1em 1em 3em;
   width: 52em;
   height: 32em;
   display: flex;
   flex-wrap: wrap-reverse;
-  /* clear: left; */
 }
 
 .letter-tile {
   width: 4em;
   height: 4em;
   margin: 0.5em;
-  background: white;
+  background: darkblue;
   text-align: center;
   font-size: 1em;
   line-height: 4em;
   text-transform: uppercase;
+  color: white;
   font-weight: bold;
   border-radius: 5em;
 }
@@ -47,7 +60,7 @@
 
 #word-input-field {
   position: relative;
-  margin: 1em;
+  margin: 1em 1em 1em 3em;
   width: 52em;
 }
 
@@ -58,10 +71,6 @@
 
 #right-container {
   float: left;
-  margin-left: 1em;
+  margin-left: 5em;
   margin-top: 7em;
-}
-
-#login-field {
-  width: 25em;
 }

@@ -14,17 +14,19 @@
 
     <div class="ui bottom attached segment pushable">
       <div class="ui visible inverted left vertical sidebar menu">
-        <a class="item">
-          <i id="game-icon" class="game icon"></i>
-          Game
+        <div class="item">
+          <h1>
+            <i id="game-icon" class="game icon"></i>
+            WORDY
+          </h1>
+        </div>
+        <a id="user-icon" class="item">
+          <i class="smile icon"></i>
+          Login to Play
         </a>
         <a class="item">
           <i class="info icon"></i>
           Rules
-        </a>
-        <a id="user-icon" class="item">
-          <i class="smile icon"></i>
-          Login
         </a>
         <a id="leaderboard-icon" class="item">
           <i class="block layout icon"></i>
@@ -38,7 +40,7 @@
             <div class="ui header floated segment" id ="game-clock-div">Time: <span id="game-clock">0</span></div>
             <div class="ui header floated segment" id ="game-score-div">Score: <span id="game-score">0</span></div>
             <div class="ui segment" id="game-container"></div>
-            <button id="play-button" class="ui button positive basic" disabled="true"><i class="icon play"></i>PLAY</button>
+            <button id="play-button" class="ui button teal" disabled="true"><i class="icon play"></i>PLAY</button>
             <div class="ui input" id="form-div">
               <form autocomplete="off" id="input-form">
                 <input id="word-input-field" type="text" name="" value="">
