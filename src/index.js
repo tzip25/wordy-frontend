@@ -21,6 +21,8 @@ window.addEventListener('DOMContentLoaded', e => {
   let gameWordsArray = [];
   let gameRunner;
 
+      userNameField.focus()
+
       //event listener for user input - matching letters to tiles
       wordForm.addEventListener("input", e=> {
         e.preventDefault()
@@ -32,7 +34,7 @@ window.addEventListener('DOMContentLoaded', e => {
         })
 
         //change letter tile color to yellow when user input matches letter
-        const userInput = e.target.value
+        const userInput = e.target.value.toLowerCase()
         inputArray = userInput.split('')
         const letterCounter = {}
 
@@ -62,12 +64,12 @@ window.addEventListener('DOMContentLoaded', e => {
 
     function submitListener(e){
       e.preventDefault()
-      const wordSubmit = e.target.children[0].value
+      const wordSubmit = e.target.children[0].value.toLowerCase()
      //Checking submitted word against highlighted letters
       let word = ""
       let highlitedLetters = document.querySelectorAll(".highlited")
       highlitedLetters.forEach(letter => {
-        word += letter.innerText
+        word += letter.innerText.toLowerCase()
       })
       //sorted word from highlited
       const sortedWord = word.split('').sort()
@@ -132,6 +134,8 @@ window.addEventListener('DOMContentLoaded', e => {
     }
 
     function startPlay() {
+      wordInputField.focus()
+      clockCounter = 0;
       rightContainer.innerText = ""
       gameWordsArray = []
       gameClock.innerText = "0"
@@ -142,7 +146,7 @@ window.addEventListener('DOMContentLoaded', e => {
         randomizeLetters()
         gameOver(gameRunner, gameTime)
 
-      }, 1500)
+      }, 500)
 
       speedInterval = setInterval(() => gameSpeedControl(gameTime), 5000)
 
@@ -172,7 +176,7 @@ window.addEventListener('DOMContentLoaded', e => {
 
     loginForm.addEventListener('submit', e=> {
       e.preventDefault()
-      let user = userNameField.value
+      let user = userNameField.value.toLowerCase()
       let body = {username: user}
 
       if(user){
