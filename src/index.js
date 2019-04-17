@@ -19,6 +19,7 @@ window.addEventListener('DOMContentLoaded', e => {
   let signedIn = false;
   let scoreMult = 1;
   let gameWordsArray = [];
+  let gameRunner;
 
       //event listener for user input - matching letters to tiles
       wordForm.addEventListener("input", e=> {
@@ -111,42 +112,41 @@ window.addEventListener('DOMContentLoaded', e => {
         gameContainer.appendChild(letterDiv)
       }
 
+      let speed = 1500
+      let clockCounter = 0
+      let speedInterval;
 
+      function gameClockFunction(){
+         ++clockCounter
+         gameClock.innerText = clockCounter
+      }
+
+
+      function gameSpeedControl(gameTime) {
+        clearInterval(gameRunner)
+        speed = speed * (0.95)
+        gameRunner = setInterval(function(){
+        randomizeLetters()
+        gameOver(gameRunner, gameTime)
+      }, speed)
+    }
 
     function startPlay() {
       rightContainer.innerText = ""
       gameWordsArray = []
       gameClock.innerText = "0"
       gameScore.innerText = "0"
-      let clockCounter = 0
       const gameTime = setInterval(gameClockFunction, 1000)
-      function gameClockFunction(){
-         ++clockCounter
-         gameClock.innerText = clockCounter
-      }
-      let gameRunner = setInterval(function(){
-        randomizeLetters()
-        if (gameContainer.children.length === 60){
-          clearInterval(gameRunner)
-          clearInterval(gameTime)
-           wordInputField.value = ""
-           wordInputField.disabled = true
-           wordInputField.style.background = "lightgray"
-           playButton.style.display = "block"
-           let longestWord;
-           if (gameWordsArray[0]) {
-               longestWord = gameWordsArray.sort(function(a, b) {
-                 return b.length - a.length
-               })[0]
-              }
-          else {longestWord = ""}
-           let finalClock = gameClock.innerHTML
-           let finalScore = gameScore.innerHTML
-           const body = {username: username, score: finalScore, longest_word: longestWord, time: finalClock}
-           adapter.createGame(body)
 
-        }
-      }, 1000)
+        gameRunner = setInterval(function(){
+        randomizeLetters()
+        gameOver(gameRunner, gameTime)
+
+      }, 1500)
+
+      speedInterval = setInterval(() => gameSpeedControl(gameTime), 5000)
+
+
     }
 
     function scoreCalculator(word){
@@ -334,6 +334,30 @@ window.addEventListener('DOMContentLoaded', e => {
       })
 
       }
+
+            function gameOver(gameRunner,gameTime){
+              if (gameContainer.children.length === 60){
+                clearInterval(gameRunner)
+                clearInterval(gameTime)
+                clearInterval(speedInterval)
+                 wordInputField.value = ""
+                 wordInputField.disabled = true
+                 wordInputField.style.background = "lightgray"
+                 playButton.style.display = "block"
+                 let longestWord;
+                 if (gameWordsArray[0]) {
+                     longestWord = gameWordsArray.sort(function(a, b) {
+                       return b.length - a.length
+                     })[0]
+                    }
+                else {longestWord = ""}
+                 let finalClock = gameClock.innerHTML
+                 let finalScore = gameScore.innerHTML
+                 const body = {username: username, score: finalScore, longest_word: longestWord, time: finalClock}
+                 adapter.createGame(body)
+
+              }
+          }
 
 
 

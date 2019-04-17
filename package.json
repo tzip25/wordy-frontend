@@ -1,0 +1,22 @@
+{
+  "name": "wordy-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tzip25/wordy-frontend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tzip25/wordy-frontend/issues"
+  },
+  "homepage": "https://github.com/tzip25/wordy-frontend#readme",
+  "dependencies": {
+    "check-word": "^1.1.0"
+  }
+}
