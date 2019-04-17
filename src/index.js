@@ -13,8 +13,6 @@ window.addEventListener('DOMContentLoaded', e => {
   const loginForm = document.querySelector("#login-form")
   const loginFormDiv = document.querySelector("#login-form-div")
 
-
-
   let username;
   let signedIn = false;
   let scoreMult = 1;
@@ -141,7 +139,7 @@ window.addEventListener('DOMContentLoaded', e => {
            adapter.createGame(body)
 
         }
-      }, 300)
+      }, 1000)
     }
 
     function scoreCalculator(word){
@@ -183,14 +181,23 @@ window.addEventListener('DOMContentLoaded', e => {
       rightContainer.innerHTML =
       `<h2>Welcome ${username.toUpperCase()}</h2>
 
-      <h3>Your High Scores:</h3>
+      <div class="ui raised segment">
+      <a class="ui red ribbon label">Your High Scores</a>
+      <br><br>
       <span id="high-scores"></span>
+      </div>
 
-      <h3>Your Longest Games:</h3>
+      <div class="ui raised segment">
+      <a class="ui orange ribbon label">Your Longest Games</a>
+      <br><br>
       <span id="longest-games"></span>
+      </div>
 
-      <h3>Your Longest Word:</h3>
+      <div class="ui raised segment">
+      <a class="ui black ribbon label">Your Longest Word</a>
+      <br><br>
       <span id="longest-word"></span>
+      </div>
       `
 
       adapter.getUsers().then(users => {
@@ -236,11 +243,17 @@ window.addEventListener('DOMContentLoaded', e => {
       rightContainer.innerHTML =
       `<h2>Leaderboard</h2>
 
-      <h3>Highest Scores:</h3>
+      <div class="ui raised segment">
+      <a class="ui red ribbon label">Highest Scores</a>
+      <br><br>
       <span id="high-scores"></span>
+      </div>
 
-      <h3>Legendary Words:</h3>
+      <div class="ui raised segment">
+      <a class="ui black ribbon label">Longest Words</a>
+      <br><br>
       <span id="legendary-words"></span>
+      </div>
       `
 
       adapter.getUsers().then(users => {
