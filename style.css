@@ -34,13 +34,13 @@
 }
 
 .letter-tile {
-  width: 4em;
-  height: 4em;
-  margin: 0.5em;
+  width: 2em;
+  height: 2em;
+  margin: 0.25em;
   background: darkblue;
   text-align: center;
-  font-size: 1em;
-  line-height: 4em;
+  font-size: 2em;
+  line-height: 2em;
   text-transform: uppercase;
   color: white;
   font-weight: bold;
