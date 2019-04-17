@@ -20,19 +20,28 @@ window.addEventListener('DOMContentLoaded', e => {
   let scoreMult = 1;
   let gameWordsArray = [];
   let gameRunner;
+  let speed = 1500
+  let clockCounter = 0
+  let speedInterval;
+
+
 
       userNameField.focus()
+
+      //abstracted event listeners
+      wordForm.addEventListener("submit", submitListener)
+      playButton.addEventListener('click', playGame)
+      leaderboardIcon.addEventListener('click', leaderboardStats)
+
 
       //event listener for user input - matching letters to tiles
       wordForm.addEventListener("input", e=> {
         e.preventDefault()
-
         //reset letter tile color to white unless in user input
         const preInputLetterTile = document.querySelectorAll(".highlited")
         preInputLetterTile.forEach(letter => {
           letter.className = "letter-tile"
         })
-
         //change letter tile color to yellow when user input matches letter
         const userInput = e.target.value.toLowerCase()
         inputArray = userInput.split('')
@@ -66,14 +75,10 @@ window.addEventListener('DOMContentLoaded', e => {
         }, 70);
       }
 
-      //check if word exists in regex dictionary.js file
-      function checkRegex(word) {
-        return regex.test(word)
-      }
-
-
-    //event listener for user submit word
-    wordForm.addEventListener("submit", submitListener)
+    //check if word exists in regex dictionary.js file
+    function checkRegex(word) {
+      return regex.test(word)
+    }
 
     function submitListener(e){
       e.preventDefault()
@@ -123,13 +128,13 @@ window.addEventListener('DOMContentLoaded', e => {
       }
     }
 
-    playButton.addEventListener('click', ev => {
+    function playGame(){
       wordInputField.disabled = false
       wordInputField.style.background = "white"
       gameContainer.innerHTML = ""
       startPlay()
-      ev.target.style.display = "none"
-    })
+      playButton.style.display = "none"
+    }
 
       function randomizeLetters(){
         const lettersArray = ['e','e','e','e','e','e','e','e','e','e','e','a','a','a','a','a','a','a','a','r','r','r','r','r','r','r','r','i','i','i','i','i','i','i','i','o','o','o','o','o','o','o','t','t','t','t','t','t','t','n','n','n','n','n','n','n','s','s','s','s','s','s','l','l','l','l','l','c','c','c','c','c','u','u','u','u','d','d','d','p','p','p','m','m','m','h','h','h','g','g','b','b','f','f','y','y','w','k','v','x','z','j','q'];
@@ -142,9 +147,6 @@ window.addEventListener('DOMContentLoaded', e => {
         gameContainer.appendChild(letterDiv)
       }
 
-      let speed = 1500
-      let clockCounter = 0
-      let speedInterval;
 
       function gameClockFunction(){
 
@@ -163,6 +165,7 @@ window.addEventListener('DOMContentLoaded', e => {
 
 
       function gameSpeedControl(gameTime) {
+        console.log(speed);
         clearInterval(gameRunner)
         speed = speed * (0.95)
         gameRunner = setInterval(function(){
@@ -180,16 +183,14 @@ window.addEventListener('DOMContentLoaded', e => {
       gameScore.innerText = "0"
       const gameTime = setInterval(gameClockFunction, 1000)
 
-        gameRunner = setInterval(function(){
-        randomizeLetters()
-        gameOver(gameRunner, gameTime)
-
+      gameRunner = setInterval(function(){
+      randomizeLetters()
+      gameOver(gameRunner, gameTime)
       }, 1500)
 
       speedInterval = setInterval(() => gameSpeedControl(gameTime), 5000)
-
-
     }
+
 
     function scoreCalculator(word){
         let wordScore = word.length*(scoreMult)
@@ -197,6 +198,7 @@ window.addEventListener('DOMContentLoaded', e => {
         parsedScore+= wordScore
         gameScore.innerText = parsedScore
     }
+
 
     userIcon.addEventListener('click', ev => {
       if(signedIn){
@@ -209,9 +211,6 @@ window.addEventListener('DOMContentLoaded', e => {
       }
     })
 
-    leaderboardIcon.addEventListener('click', ev=> {
-      LeaderboardStats()
-    })
 
     loginForm.addEventListener('submit', e=> {
       e.preventDefault()
@@ -263,7 +262,6 @@ window.addEventListener('DOMContentLoaded', e => {
       <span id="longest-word"></span>
       </div>
       `
-
       adapter.getUsers().then(users => {
 
           const currentUser = users.find(user => {
@@ -303,7 +301,7 @@ window.addEventListener('DOMContentLoaded', e => {
     }
 
 
-    function LeaderboardStats() {
+    function leaderboardStats() {
       rightContainer.innerHTML =
       `<h2>Leaderboard</h2>
 
@@ -401,7 +399,7 @@ window.addEventListener('DOMContentLoaded', e => {
                  let finalScore = gameScore.innerHTML
                  const body = {username: username, score: finalScore, longest_word: longestWord, time: finalClock}
                  adapter.createGame(body)
-
+                 speed = 1500
               }
           }
 
