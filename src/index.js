@@ -14,6 +14,7 @@ window.addEventListener('DOMContentLoaded', e => {
   const loginFormDiv = document.querySelector("#login-form-div")
   const leftMenu = document.querySelector("#left-menu")
   const userNameField = document.querySelector("#login-field")
+  const rulesIcon = document.querySelector("#rules-icon")
 
   let username;
   let signedIn = false;
@@ -32,6 +33,7 @@ window.addEventListener('DOMContentLoaded', e => {
       wordForm.addEventListener("submit", submitListener)
       playButton.addEventListener('click', playGame)
       leaderboardIcon.addEventListener('click', leaderboardStats)
+      rulesIcon.addEventListener('click', displayRules)
 
 
       //event listener for user input - matching letters to tiles
@@ -404,6 +406,13 @@ window.addEventListener('DOMContentLoaded', e => {
           }
 
 
+        function displayRules() {
+          rightContainer.innerHTML = ''
+          rightContainer.innerHTML =
+          `<h3>Wordy Nerdy Rules</h3>
+          <p>Rules go here</p>
+          `
+        }
 
 
 
