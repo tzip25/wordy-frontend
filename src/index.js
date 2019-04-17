@@ -12,12 +12,13 @@ window.addEventListener('DOMContentLoaded', e => {
   const rightContainer = document.querySelector("#right-container")
   const loginForm = document.querySelector("#login-form")
   const loginFormDiv = document.querySelector("#login-form-div")
+  const leftMenu = document.querySelector("#left-menu")
+  const userNameField = document.querySelector("#login-field")
 
   let username;
   let signedIn = false;
   let scoreMult = 1;
   let gameWordsArray = [];
-
 
       //event listener for user input - matching letters to tiles
       wordForm.addEventListener("input", e=> {
@@ -49,6 +50,12 @@ window.addEventListener('DOMContentLoaded', e => {
         })
       })
 
+      //check if word exists in regex dictionary.js file
+      function checkRegex(word) {
+        return regex.test(word)
+      }
+
+
       //event listener for user submit word
        wordForm.addEventListener("submit", submitListener)
 
@@ -66,22 +73,22 @@ window.addEventListener('DOMContentLoaded', e => {
       //sorted word from user input
       const sortedWordSubmit = wordSubmit.split('').sort()
 
-      if(sortedWord.join('') === sortedWordSubmit.join('')){
-         gameWordsArray.push(wordSubmit)
-        scoreCalculator(wordSubmit)
-        highlitedLetters.forEach(letter => {
-          gameContainer.removeChild(letter)
-
-          rightContainer.innerHTML =
-          `<h1>${wordSubmit}</h1>`
-
-          wordForm.reset()
-
-        })
+      //check if all letters of word submitted are on the DOM and if word submitted is in regex dictionary
+      if(sortedWord.join('') === sortedWordSubmit.join('') && checkRegex(wordSubmit)){
+          //add word to temp game array of words so we can later find longest word
+          gameWordsArray.push(wordSubmit)
+          //calculate score based on length of word
+          scoreCalculator(wordSubmit)
+          //remove submitted letters from the DOM and display submitted word in right container
+          highlitedLetters.forEach(letter => {
+            gameContainer.removeChild(letter)
+            rightContainer.innerHTML =
+            `<h1>${wordSubmit}</h1>`
+            //clear word input field
+            wordForm.reset()
+          })
       } else {
-        highlitedLetters.forEach(letter => {
           rightContainer.innerHTML = `<h1>Invalid Word</h1>`
-        })
       }
     }
 
@@ -165,18 +172,32 @@ window.addEventListener('DOMContentLoaded', e => {
 
     loginForm.addEventListener('submit', e=> {
       e.preventDefault()
-      let user = document.querySelector("#login-field").value
+      let user = userNameField.value
       let body = {username: user}
-      adapter.createUser(body).then(res=> {
-        signedIn = true;
-        playButton.disabled = false
-        username = user
-        userStats()
-      })
+
+      if(user){
+        adapter.createUser(body).then(res=> {
+          signedIn = true;
+          playButton.disabled = false
+          username = user
+          userStats()
+          //create and show logout button when user is logged in
+          const logout = document.createElement('a')
+          logout.href = "javascript:window.location.reload(true)"
+          logout.className = "item"
+          logout.id = "logout-icon"
+          logout.innerHTML = `<i class="smile icon"></i>Logout`
+          leftMenu.appendChild(logout)
+        })
+      } else {
+        alert("Please enter a username")
+      }
+
     });
 
     function userStats() {
-      userIcon.innerHTML = `<i class="smile icon"></i> My Stats`
+      //change icon from login to my stats
+      userIcon.innerHTML = `<i class="block layout icon"></i> My Stats`
 
       rightContainer.innerHTML =
       `<h2>Welcome ${username.toUpperCase()}</h2>

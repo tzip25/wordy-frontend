@@ -5,6 +5,7 @@
     <title>Wordy Game</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
+    <script src="src/dictionary.js" charset="utf-8"></script>
 
     <script src="src/adapter.js" charset="utf-8"></script>
     <script src="src/index.js" charset="utf-8"></script>
@@ -13,7 +14,7 @@
 
 
     <div class="ui bottom attached segment pushable">
-      <div class="ui visible inverted left vertical sidebar menu">
+      <div id="left-menu" class="ui visible inverted left vertical sidebar menu">
         <div class="item">
           <h1>
             <i id="game-icon" class="game icon"></i>
@@ -29,7 +30,7 @@
           Rules
         </a>
         <a id="leaderboard-icon" class="item">
-          <i class="block layout icon"></i>
+          <i class="trophy icon"></i>
           Leaderboard
         </a>
       </div>
@@ -58,6 +59,8 @@
             <input id="login-field" type="text" name="" value="" placeholder="username">
             <br><br>
             <input type="submit">
+            <br><br>
+            <!-- <div id="valid-username" hidden>Please enter a username</div> -->
           </form>
           </div>
         </div>
