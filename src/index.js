@@ -119,8 +119,18 @@ window.addEventListener('DOMContentLoaded', e => {
       let speedInterval;
 
       function gameClockFunction(){
+
+                  String.prototype.toMMSS = function () {
+            var sec_num = parseInt(this, 10); // don't forget the second param
+            var minutes = Math.floor((sec_num) / 60);
+            var seconds = sec_num - (minutes * 60);
+
+            if (minutes < 10) {minutes = "0"+minutes;}
+            if (seconds < 10) {seconds = "0"+seconds;}
+            return minutes + ':' + seconds;
+          }
          ++clockCounter
-         gameClock.innerText = clockCounter
+         gameClock.innerText = clockCounter.toString(10).toMMSS()
       }
 
 
@@ -138,7 +148,7 @@ window.addEventListener('DOMContentLoaded', e => {
       clockCounter = 0;
       rightContainer.innerText = ""
       gameWordsArray = []
-      gameClock.innerText = "0"
+      gameClock.innerText = "00:00"
       gameScore.innerText = "0"
       const gameTime = setInterval(gameClockFunction, 1000)
 
@@ -167,6 +177,7 @@ window.addEventListener('DOMContentLoaded', e => {
 
         rightContainer.innerHTML = ""
         rightContainer.appendChild(loginFormDiv)
+        userNameField.focus()
       }
     })
 
@@ -355,13 +366,20 @@ window.addEventListener('DOMContentLoaded', e => {
                      })[0]
                     }
                 else {longestWord = ""}
-                 let finalClock = gameClock.innerHTML
+                 let timeStringArray = gameClock.innerHTML.split(":")
+                 let secondCount = (parseInt(timeStringArray[0])*60) + parseInt(timeStringArray[1])
+                 let finalClock = secondCount
+                 console.log(finalClock)
                  let finalScore = gameScore.innerHTML
                  const body = {username: username, score: finalScore, longest_word: longestWord, time: finalClock}
                  adapter.createGame(body)
 
               }
           }
+
+
+
+
 
 
 
