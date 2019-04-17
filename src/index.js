@@ -146,7 +146,7 @@ window.addEventListener('DOMContentLoaded', e => {
         randomizeLetters()
         gameOver(gameRunner, gameTime)
 
-      }, 500)
+      }, 1500)
 
       speedInterval = setInterval(() => gameSpeedControl(gameTime), 5000)
 
