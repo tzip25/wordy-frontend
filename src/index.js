@@ -53,17 +53,31 @@ window.addEventListener('DOMContentLoaded', e => {
         })
       })
 
+      function fade(element) {
+        let op = 1;  // initial opacity
+        let timer = setInterval(function () {
+            if (op <= 0.1){
+                clearInterval(timer);
+                element.style.display = 'none';
+            }
+            element.style.opacity = op;
+            element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+            op -= op * 0.1;
+        }, 70);
+      }
+
       //check if word exists in regex dictionary.js file
       function checkRegex(word) {
         return regex.test(word)
       }
 
 
-      //event listener for user submit word
-       wordForm.addEventListener("submit", submitListener)
+    //event listener for user submit word
+    wordForm.addEventListener("submit", submitListener)
 
     function submitListener(e){
       e.preventDefault()
+
       const wordSubmit = e.target.children[0].value.toLowerCase()
      //Checking submitted word against highlighted letters
       let word = ""
@@ -85,13 +99,27 @@ window.addEventListener('DOMContentLoaded', e => {
           //remove submitted letters from the DOM and display submitted word in right container
           highlitedLetters.forEach(letter => {
             gameContainer.removeChild(letter)
-            rightContainer.innerHTML =
-            `<h1>${wordSubmit}</h1>`
+
+            //fade out valid word
+            rightContainer.innerHTML = ''
+            const h1 = document.createElement('h1')
+            h1.className = "valid-word"
+            h1.innerText = wordSubmit.toUpperCase()
+            rightContainer.appendChild(h1)
+            fade(h1)
+
             //clear word input field
             wordForm.reset()
+
           })
       } else {
-          rightContainer.innerHTML = `<h1>Invalid Word</h1>`
+        //fade out invalid word
+        rightContainer.innerHTML = ''
+        const h1 = document.createElement('h1')
+        h1.className = "invalid-word"
+        h1.innerHTML = `INVALID <br> WORD`
+        rightContainer.appendChild(h1)
+        fade(h1)
       }
     }
 
