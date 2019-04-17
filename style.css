@@ -86,3 +86,13 @@
   margin-left: 5em;
   margin-top: 7em;
 }
+
+.valid-word {
+  font-size: 6em;
+  color: #07bfb6;
+}
+
+.invalid-word {
+  font-size: 5em;
+  color: #bf0741;
+}
