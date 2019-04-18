@@ -142,7 +142,6 @@ window.addEventListener('DOMContentLoaded', e => {
         const lettersArray = ['e','e','e','e','e','e','e','e','e','e','e','a','a','a','a','a','a','a','a','r','r','r','r','r','r','r','r','i','i','i','i','i','i','i','i','o','o','o','o','o','o','o','t','t','t','t','t','t','t','n','n','n','n','n','n','n','s','s','s','s','s','s','l','l','l','l','l','c','c','c','c','c','u','u','u','u','d','d','d','p','p','p','m','m','m','h','h','h','g','g','b','b','f','f','y','y','w','k','v','x','z','j','q'];
         let randomIndex = Math.floor(Math.random()*103)
         let letterDiv = document.createElement("div")
-        letterDiv.dataset.action = "falling-letter"
         letterDiv.className = "letter-tile"
         letterDiv.innerText = lettersArray[randomIndex]
         letterDiv.dataset.id = letterDiv.innerText
@@ -388,20 +387,24 @@ window.addEventListener('DOMContentLoaded', e => {
                  wordInputField.style.background = "lightgray"
                  playButton.style.display = "block"
                  let longestWord;
+
                  if (gameWordsArray[0]) {
                      longestWord = gameWordsArray.sort(function(a, b) {
                        return b.length - a.length
                      })[0]
                     }
                 else {longestWord = ""}
+
                  let timeStringArray = gameClock.innerHTML.split(":")
                  let secondCount = (parseInt(timeStringArray[0])*60) + parseInt(timeStringArray[1])
                  let finalClock = secondCount
-                 console.log(finalClock)
                  let finalScore = gameScore.innerHTML
                  const body = {username: username, score: finalScore, longest_word: longestWord, time: finalClock}
                  adapter.createGame(body)
+                 //reset game start speed for next game
                  speed = 1500
+                 //display game over text and game stats
+                 gameOverText(finalScore, finalClock, longestWord)
               }
           }
 
@@ -409,13 +412,36 @@ window.addEventListener('DOMContentLoaded', e => {
         function displayRules() {
           rightContainer.innerHTML = ''
           rightContainer.innerHTML =
-          `<h3>Wordy Nerdy Rules</h3>
-          <p>Rules go here</p>
+          `<div class="ui raised segment">
+          <a class="ui red ribbon label">Rules</a>
+          <h2>Welcome Nerd!</h2>
+          <p>If you’re a word enthusiast like we are, then you’ve come to the right place. You can form words by typing in the letters you see on the board, and hitting enter to submit. You’ll score one point for every letter. 5-letter words are worth 1.5x points, 6-letter words are 2x points, and anything 7 letters and over is worth 2.5x points! The letters are placed on the board slowly at first, but don’t get too comfortable! As time goes on, the rate of new tiles will get faster and faster. Once the board fills up it’s GAME OVER. If you’re up against the ropes, you can hit space to use one of your bombs to completely clear the board. You’re only given 3  so use them wisely!
+          <h3>Happy nerding!</h3>
+          </div>
           `
         }
 
 
+        function gameOverText(finalScore, finalTime, longestWord) {
+          rightContainer.innerHTML = ''
 
+          rightContainer.innerHTML +=
+
+        `<h1 class="game-over">GAME <br> OVER</h1>
+        <div class="ui segments">
+          <div class="ui segment"><p>Score</p></div>
+          <div class="ui secondary segment"><p>${finalScore}</p></div>
+        </div>
+        <div class="ui segments">
+          <div class="ui segment"><p>Time</p></div>
+          <div class="ui secondary segment"><p>${finalTime}</p></div>
+        </div>
+        <div class="ui segments">
+          <div class="ui segment"><p>Longest Word</p></div>
+          <div class="ui secondary segment"><p>${longestWord}</p></div>
+        </div>
+        `
+      }
 
 
 
