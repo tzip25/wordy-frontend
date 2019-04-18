@@ -99,3 +99,8 @@
   font-size: 4em;
   color: #bf0741;
 }
+
+#game-bomb-div {
+  float: right;
+  margin-top: 4em;
+}

@@ -15,6 +15,7 @@ window.addEventListener('DOMContentLoaded', e => {
   const leftMenu = document.querySelector("#left-menu")
   const userNameField = document.querySelector("#login-field")
   const rulesIcon = document.querySelector("#rules-icon")
+  const bombDiv = document.querySelector("#bomb-div")
 
   let username;
   let signedIn = false;
@@ -24,6 +25,7 @@ window.addEventListener('DOMContentLoaded', e => {
   let speed = 1500
   let clockCounter = 0
   let speedInterval;
+  let bombArray;
 
 
 
@@ -34,6 +36,7 @@ window.addEventListener('DOMContentLoaded', e => {
       playButton.addEventListener('click', playGame)
       leaderboardIcon.addEventListener('click', leaderboardStats)
       rulesIcon.addEventListener('click', displayRules)
+      document.addEventListener('keyup', bombFunction)
 
 
       //event listener for user input - matching letters to tiles
@@ -166,7 +169,6 @@ window.addEventListener('DOMContentLoaded', e => {
 
 
       function gameSpeedControl(gameTime) {
-        console.log(speed);
         clearInterval(gameRunner)
         speed = speed * (0.95)
         gameRunner = setInterval(function(){
@@ -176,6 +178,8 @@ window.addEventListener('DOMContentLoaded', e => {
     }
 
     function startPlay() {
+      bombArray = ["💣", "💣","💣"]
+      renderBombs(bombArray)
       wordInputField.focus()
       clockCounter = 0;
       rightContainer.innerText = ""
@@ -442,6 +446,24 @@ window.addEventListener('DOMContentLoaded', e => {
         </div>
         `
       }
+
+
+     function renderBombs(bombArray){
+       bombDiv.innerText =''
+       bombArray.forEach(bomb => {
+         bombDiv.innerText += bomb
+       })
+     }
+
+     function bombFunction(e){
+       if (e.keyCode == 32 && bombArray.length > 0){
+         bombArray.pop()
+         renderBombs(bombArray)
+         gameContainer.innerHTML=""
+         wordForm.reset()
+       }
+     }
+
 
 
 
