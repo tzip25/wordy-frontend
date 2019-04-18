@@ -79,9 +79,10 @@
 }
 
 #right-container {
+  max-width: 22em;
   float: left;
   margin-left: 4em;
-  margin-top: 6em;
+  margin-top: 6.5em;
 }
 
 .valid-word {
@@ -91,5 +92,10 @@
 
 .invalid-word {
   font-size: 5em;
+  color: #bf0741;
+}
+
+.game-over {
+  font-size: 4em;
   color: #bf0741;
 }
