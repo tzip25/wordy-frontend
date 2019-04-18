@@ -264,7 +264,7 @@ window.addEventListener('DOMContentLoaded', e => {
           logout.href = "javascript:window.location.reload(true)"
           logout.className = "item"
           logout.id = "logout-icon"
-          logout.innerHTML = `<i class="smile icon"></i>Logout`
+          logout.innerHTML = `<i class="frown icon"></i>Logout`
           leftMenu.appendChild(logout)
         })
       } else {
