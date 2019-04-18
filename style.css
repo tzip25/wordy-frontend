@@ -1,3 +1,7 @@
+.game-title {
+  font-size: 1.5em;
+}
+
 #game-score-div {
   width: 9em;
   display: block;
