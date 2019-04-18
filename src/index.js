@@ -56,7 +56,6 @@ window.addEventListener('DOMContentLoaded', e => {
 
         sounds.playTileSound()
 
-
         inputArray.forEach(letter => {
 
           if (letterCounter[letter]){ letterCounter[letter]+=1
@@ -241,7 +240,10 @@ window.addEventListener('DOMContentLoaded', e => {
 
     loginForm.addEventListener('submit', e=> {
       e.preventDefault()
-      let user = userNameField.value.toLowerCase()
+
+      let user = userNameField.value
+      user = capitalizeWord(user)
+
       let body = {username: user}
 
       if(user){
@@ -269,7 +271,7 @@ window.addEventListener('DOMContentLoaded', e => {
       userIcon.innerHTML = `<i class="block layout icon"></i> My Stats`
 
       rightContainer.innerHTML =
-      `<h2>Welcome ${username.toUpperCase()}</h2>
+      `<h2>Welcome ${username}</h2>
 
       <div class="ui raised segment">
       <a class="ui red ribbon label">Your High Scores</a>
@@ -446,7 +448,7 @@ window.addEventListener('DOMContentLoaded', e => {
           `<div class="ui raised segment">
           <a class="ui red ribbon label">Rules</a>
           <h2>Welcome Nerd!</h2>
-          <p>If you’re a word enthusiast like we are, then you’ve come to the right place. You can form words by typing in the letters you see on the board, and hitting enter to submit. You’ll score one point for every letter. 5-letter words are worth 1.5x points, 6-letter words are 2x points, and anything 7 letters and over is worth 2.5x points! The letters are placed on the board slowly at first, but don’t get too comfortable! As time goes on, the rate of new tiles will get faster and faster. Once the board fills up it’s GAME OVER. If you’re up against the ropes, you can hit space to use one of your bombs to completely clear the board. You’re only given 3  so use them wisely!
+          <p>If you’re a word enthusiast, then you’ve come to the right place. Form words by typing in the letters you see on the board and hitting ENTER. Letters do not need to be in order. You’ll score one point for every letter. 5-letter words are worth 1.5x points, 6-letter words are 2x points, and anything 7 letters and over is worth 2.5x points! The letters are placed on the board slowly at first, but don’t get too comfortable! As time goes on, the rate of new tiles will get faster and faster. Once the board fills up it’s GAME OVER. If you’re up against the ropes, you can hit the SPACE key to use one of your bombs to completely clear the board. You’re only given 3, so use them wisely!
           <h3>Happy nerding!</h3>
           </div>
           `
@@ -493,6 +495,10 @@ window.addEventListener('DOMContentLoaded', e => {
      }
 
 
+     function capitalizeWord(string){
+       const s = string.toLowerCase()
+       return s.charAt(0).toUpperCase() + s.slice(1)
+     }
 
 
 });
