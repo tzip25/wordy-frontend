@@ -97,7 +97,7 @@ window.addEventListener('DOMContentLoaded', e => {
     function submitListener(e){
       e.preventDefault()
 
-      const wordSubmit = e.target.children[0].value.toLowerCase()
+      const wordSubmit = e.target.children[0].value.toLowerCase().replace(/\s/g, '');
      //Checking submitted word against highlighted letters
       let word = ""
       let highlitedLetters = document.querySelectorAll(".highlited")
