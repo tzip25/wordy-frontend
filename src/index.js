@@ -15,7 +15,8 @@ window.addEventListener('DOMContentLoaded', e => {
   const leftMenu = document.querySelector("#left-menu")
   const userNameField = document.querySelector("#login-field")
   const rulesIcon = document.querySelector("#rules-icon")
-  const bombDiv = document.querySelector("#bomb-div")
+  const volumeIcon = document.querySelector("#volume-icon")
+  const bombDiv =  document.querySelector("#bomb-div")
 
   let username;
   let signedIn = false;
@@ -25,9 +26,10 @@ window.addEventListener('DOMContentLoaded', e => {
   let gameWordsArray = [];
   let gameRunner;
   let speed = 1500
-  let clockCounter = 0
+  let clockCounter = 0;
   let speedInterval;
   let bombArray;
+  let soundOn = true;
 
 
 
@@ -39,6 +41,7 @@ window.addEventListener('DOMContentLoaded', e => {
       leaderboardIcon.addEventListener('click', leaderboardStats)
       rulesIcon.addEventListener('click', displayRules)
       document.addEventListener('keyup', bombFunction)
+      volumeIcon.addEventListener('click',toggleSound)
 
 
       //event listener for user input - matching letters to tiles
@@ -54,7 +57,9 @@ window.addEventListener('DOMContentLoaded', e => {
         inputArray = userInput.split('')
         const letterCounter = {}
 
+        if (soundOn){
         sounds.playTileSound()
+        }
 
         inputArray.forEach(letter => {
 
@@ -107,8 +112,9 @@ window.addEventListener('DOMContentLoaded', e => {
       //check if all letters of word submitted are on the DOM and if word submitted is in regex dictionary
       if(sortedWord.join('') === sortedWordSubmit.join('') && checkRegex(wordSubmit)){
           //play word submit sound
+          if (soundOn) {
           sounds.playWordSound()
-
+          }
           //add word to temp game array of words so we can later find longest word
           gameWordsArray.push(wordSubmit)
           //calculate score based on length of word
@@ -132,8 +138,9 @@ window.addEventListener('DOMContentLoaded', e => {
           })
       } else {
         //play invalid word sound
+        if (soundOn){
         sounds.playInvalidWordSound()
-
+        }
         //fade out invalid word
         rightContainer.innerHTML = ''
         const h1 = document.createElement('h1')
@@ -435,7 +442,9 @@ window.addEventListener('DOMContentLoaded', e => {
                  scoreMult = 1
                  timeMult = 1
                  //play game over sound
+                 if (soundOn){
                  sounds.playGameOverSound()
+                 }
                  //display game over text and game stats
                  gameOverText(finalScore, gameClockString, longestWord)
               }
@@ -486,7 +495,9 @@ window.addEventListener('DOMContentLoaded', e => {
 
      function bombFunction(e){
        if (e.keyCode == 32 && bombArray.length > 0){
+         if (soundOn){
          sounds.playBombSound()
+         }
          bombArray.pop()
          renderBombs(bombArray)
          gameContainer.innerHTML=""
@@ -498,6 +509,18 @@ window.addEventListener('DOMContentLoaded', e => {
      function capitalizeWord(string){
        const s = string.toLowerCase()
        return s.charAt(0).toUpperCase() + s.slice(1)
+     }
+
+     function toggleSound(){
+       if (soundOn){
+         soundOn = false;
+         volumeIcon.innerHTML = `<i class="volume off icon"></i>Sound Off`
+
+       }
+       else {
+         soundOn = true;
+         volumeIcon.innerHTML = `<i class="volume up icon"></i>Sound On`
+       }
      }
 
 
