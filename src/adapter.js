@@ -1,4 +1,5 @@
-const URL = "http://localhost:3000/api/v1"
+// const URL = "http://localhost:3000/api/v1"
+const URL = "https://wwn-backend.herokuapp.com"
 
 const adapter = {
 
