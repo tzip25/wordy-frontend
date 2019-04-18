@@ -458,7 +458,7 @@ window.addEventListener('DOMContentLoaded', e => {
           <a class="ui red ribbon label">Rules</a>
           <h2>Welcome Nerd!</h2>
           <p>If you’re a word enthusiast, then you’ve come to the right place. Form words by typing letters you see on the board and hitting ENTER. Letters do not need to be in order. The letters appear slowly at first, but don’t get too comfortable! As time goes on, the rate of new tiles will get faster and faster. Once the board fills up it’s GAME OVER.</p>
-          <p><b>Scoring</b><br>
+          <p><b>SCORING</b><br>
           You’ll score one point for every letter. 5-letter words are worth 1.5x points, 6-letter words are 2x points, and anything 7 letters and over is worth 2.5x points! Scoring also increases incrementaly the longer you play.
           </p>
           <p><b>BOMBS</b> <i class="bomb icon"></i><i class="bomb icon"></i><i class="bomb icon"></i><br>
