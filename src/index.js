@@ -52,6 +52,9 @@ window.addEventListener('DOMContentLoaded', e => {
         inputArray = userInput.split('')
         const letterCounter = {}
 
+        sounds.playTileSound()
+
+
         inputArray.forEach(letter => {
 
           if (letterCounter[letter]){ letterCounter[letter]+=1
@@ -102,6 +105,9 @@ window.addEventListener('DOMContentLoaded', e => {
 
       //check if all letters of word submitted are on the DOM and if word submitted is in regex dictionary
       if(sortedWord.join('') === sortedWordSubmit.join('') && checkRegex(wordSubmit)){
+          //play word submit sound
+          sounds.playWordSound()
+
           //add word to temp game array of words so we can later find longest word
           gameWordsArray.push(wordSubmit)
           //calculate score based on length of word
@@ -123,6 +129,9 @@ window.addEventListener('DOMContentLoaded', e => {
 
           })
       } else {
+        //play invalid word sound
+        sounds.playInvalidWordSound()
+
         //fade out invalid word
         rightContainer.innerHTML = ''
         const h1 = document.createElement('h1')
@@ -178,7 +187,7 @@ window.addEventListener('DOMContentLoaded', e => {
     }
 
     function startPlay() {
-      bombArray = ["💣", "💣","💣"]
+      bombArray = [`<i class="bomb icon"></i>`, `<i class="bomb icon"></i>`,`<i class="bomb icon"></i>`]
       renderBombs(bombArray)
       wordInputField.focus()
       clockCounter = 0;
@@ -407,6 +416,8 @@ window.addEventListener('DOMContentLoaded', e => {
                  adapter.createGame(body)
                  //reset game start speed for next game
                  speed = 1500
+                 //play game over sound
+                 sounds.playGameOverSound()
                  //display game over text and game stats
                  gameOverText(finalScore, finalClock, longestWord)
               }
@@ -449,14 +460,15 @@ window.addEventListener('DOMContentLoaded', e => {
 
 
      function renderBombs(bombArray){
-       bombDiv.innerText =''
+       bombDiv.innerHTML =''
        bombArray.forEach(bomb => {
-         bombDiv.innerText += bomb
+         bombDiv.innerHTML += bomb
        })
      }
 
      function bombFunction(e){
        if (e.keyCode == 32 && bombArray.length > 0){
+         sounds.playBombSound()
          bombArray.pop()
          renderBombs(bombArray)
          gameContainer.innerHTML=""
