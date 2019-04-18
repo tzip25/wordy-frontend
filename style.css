@@ -1,16 +1,17 @@
 #game-score-div {
-  width: 7.5em;
+  width: 9em;
   display: block;
   margin-top: 1em;
   padding-right: -1.5em;
+  background: #dcf2f0;
 }
 
 #game-clock-div {
-  width: 7.5em;
+  width: 9em;
   display: block;
   margin-left: 2.4em;
   margin-top: 1em;
-
+  background: #dcf2f0;
 }
 
 #word-submit-confirm {
