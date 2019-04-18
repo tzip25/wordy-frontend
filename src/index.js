@@ -19,7 +19,9 @@ window.addEventListener('DOMContentLoaded', e => {
 
   let username;
   let signedIn = false;
+  let wordScore;
   let scoreMult = 1;
+  let timeMult = 1;
   let gameWordsArray = [];
   let gameRunner;
   let speed = 1500
@@ -120,7 +122,8 @@ window.addEventListener('DOMContentLoaded', e => {
             rightContainer.innerHTML = ''
             const h1 = document.createElement('h1')
             h1.className = "valid-word"
-            h1.innerText = wordSubmit.toUpperCase()
+            h1.innerHTML = `${wordSubmit.toUpperCase()}<br> + ${wordScore}`
+
             rightContainer.appendChild(h1)
             fade(h1)
 
@@ -160,18 +163,18 @@ window.addEventListener('DOMContentLoaded', e => {
         gameContainer.appendChild(letterDiv)
       }
 
+      String.prototype.toMMSS = function () {
+      var sec_num = parseInt(this, 10); // don't forget the second param
+      var minutes = Math.floor((sec_num) / 60);
+      var seconds = sec_num - (minutes * 60);
+
+      if (minutes < 10) {minutes = "0"+minutes;}
+      if (seconds < 10) {seconds = "0"+seconds;}
+      return minutes + ':' + seconds;
+      }
+
 
       function gameClockFunction(){
-
-                  String.prototype.toMMSS = function () {
-            var sec_num = parseInt(this, 10); // don't forget the second param
-            var minutes = Math.floor((sec_num) / 60);
-            var seconds = sec_num - (minutes * 60);
-
-            if (minutes < 10) {minutes = "0"+minutes;}
-            if (seconds < 10) {seconds = "0"+seconds;}
-            return minutes + ':' + seconds;
-          }
          ++clockCounter
          gameClock.innerText = clockCounter.toString(10).toMMSS()
       }
@@ -180,6 +183,7 @@ window.addEventListener('DOMContentLoaded', e => {
       function gameSpeedControl(gameTime) {
         clearInterval(gameRunner)
         speed = speed * (0.95)
+        timeMult = timeMult * 1.05
         gameRunner = setInterval(function(){
         randomizeLetters()
         gameOver(gameRunner, gameTime)
@@ -207,7 +211,16 @@ window.addEventListener('DOMContentLoaded', e => {
 
 
     function scoreCalculator(word){
-        let wordScore = word.length*(scoreMult)
+       if (word.length === 5){
+         scoreMult = 1.5
+       }
+       else if (word.length === 6){
+         scoreMult = 2
+       }
+       else if (word.length >= 7){
+         scoreMult = 2.5
+       }
+        wordScore = Math.round(word.length*scoreMult * timeMult)
         let parsedScore = parseInt(gameScore.innerText)
         parsedScore+= wordScore
         gameScore.innerText = parsedScore
@@ -298,8 +311,9 @@ window.addEventListener('DOMContentLoaded', e => {
           })
 
           timeArr.sort(function(a, b){return b-a}).slice(0,3).forEach(time => {
+            let timeString = time.toString(10).toMMSS()
             const gameLengths = document.querySelector('#longest-games')
-            gameLengths.innerHTML += `<p>${time} seconds</p>`
+            gameLengths.innerHTML += `<p>${timeString}</p>`
           })
 
           wordArr.sort(function(a, b) {
@@ -407,19 +421,21 @@ window.addEventListener('DOMContentLoaded', e => {
                      })[0]
                     }
                 else {longestWord = ""}
-
-                 let timeStringArray = gameClock.innerHTML.split(":")
+                let gameClockString = gameClock.innerHTML;
+                 let timeStringArray = gameClockString.split(":")
                  let secondCount = (parseInt(timeStringArray[0])*60) + parseInt(timeStringArray[1])
                  let finalClock = secondCount
                  let finalScore = gameScore.innerHTML
                  const body = {username: username, score: finalScore, longest_word: longestWord, time: finalClock}
                  adapter.createGame(body)
-                 //reset game start speed for next game
+                 //reset game start speed and score mult for next game
                  speed = 1500
+                 scoreMult = 1
+                 timeMult = 1
                  //play game over sound
                  sounds.playGameOverSound()
                  //display game over text and game stats
-                 gameOverText(finalScore, finalClock, longestWord)
+                 gameOverText(finalScore, gameClockString, longestWord)
               }
           }
 
