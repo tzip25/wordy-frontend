@@ -109,3 +109,13 @@
   float: right;
   margin-top: 4em;
 }
+
+/* Place the navbar at the bottom of the page, and make it stick */
+#footer {
+  background-color: teal;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 8px 10px;
+}

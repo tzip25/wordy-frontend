@@ -3,31 +3,31 @@ const sounds = {
 
       playBombSound: () => {
         const bombSound = new Audio()
-        bombSound.src = "sounds/bomb2.mp3"
+        bombSound.src = "https://drive.google.com/uc?export=download&id=1CE0j3fYAEIiQoIP4rvpPHwLk4PnQTnW-"
         bombSound.play()
       },
 
       playTileSound: () => {
         const tileSound = new Audio()
-        tileSound.src = "sounds/tile.mp3"
+        tileSound.src = "https://drive.google.com/uc?export=download&id=1ovUdUZoNXAZgGQqvAzkLDg-BiIF5jLl7"
         tileSound.play()
       },
 
       playWordSound: () => {
         const wordSound = new Audio()
-        wordSound.src = "sounds/wordsubmit.mp3"
+        wordSound.src = "https://drive.google.com/uc?export=download&id=1c-6MhpWIzp947EDqwqSQ9TVDcT__tIpi"
         wordSound.play()
       },
 
       playInvalidWordSound: () => {
         const invalidWordSound = new Audio()
-        invalidWordSound.src = "sounds/invalid.mp3"
+        invalidWordSound.src = "https://drive.google.com/uc?export=download&id=1B0yae6e8PjIqRJb2NQEZeSuXNKOVQdX8"
         invalidWordSound.play()
       },
 
       playGameOverSound: () => {
         const gameOver = new Audio()
-        gameOver.src = "sounds/buzzer.mp3"
+        gameOver.src = "https://drive.google.com/uc?export=download&id=1WZ5mjXcf5HiqCpyGxfT67GIH49BZOUzc"
         gameOver.play()
       },
 
