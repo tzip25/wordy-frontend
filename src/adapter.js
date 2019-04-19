@@ -1,3 +1,8 @@
+const port = process.env.PORT || 8000;
+server.listen(port, () => {
+    console.log("App is running on port " + port);
+});
+
 // const URL = "http://localhost:3000/api/v1"
 const URL = "https://wwn-backend.herokuapp.com/api/v1/"
 
