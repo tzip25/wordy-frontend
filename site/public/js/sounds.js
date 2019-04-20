@@ -9,25 +9,25 @@ const sounds = {
 
       playTileSound: () => {
         const tileSound = new Audio()
-        tileSound.src = "https://drive.google.com/uc?export=download&id=1ovUdUZoNXAZgGQqvAzkLDg-BiIF5jLl7"
+        tileSound.src = "https://raw.githubusercontent.com/tzip25/wordy-frontend/master/site/public/sounds/tile.mp3"
         tileSound.play()
       },
 
       playWordSound: () => {
         const wordSound = new Audio()
-        wordSound.src = "https://drive.google.com/uc?export=download&id=1c-6MhpWIzp947EDqwqSQ9TVDcT__tIpi"
+        wordSound.src = "https://raw.githubusercontent.com/tzip25/wordy-frontend/master/site/public/sounds/wordsubmit.mp3"
         wordSound.play()
       },
 
       playInvalidWordSound: () => {
         const invalidWordSound = new Audio()
-        invalidWordSound.src = "https://drive.google.com/uc?export=download&id=1B0yae6e8PjIqRJb2NQEZeSuXNKOVQdX8"
+        invalidWordSound.src = "https://raw.githubusercontent.com/tzip25/wordy-frontend/master/site/public/sounds/invalid.mp3"
         invalidWordSound.play()
       },
 
       playGameOverSound: () => {
         const gameOver = new Audio()
-        gameOver.src = "https://drive.google.com/uc?export=download&id=1WZ5mjXcf5HiqCpyGxfT67GIH49BZOUzc"
+        gameOver.src = "https://raw.githubusercontent.com/tzip25/wordy-frontend/master/site/public/sounds/buzzer.mp3"
         gameOver.play()
       },
 
