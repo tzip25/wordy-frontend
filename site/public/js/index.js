@@ -456,7 +456,6 @@ window.addEventListener('DOMContentLoaded', e => {
           rightContainer.innerHTML =
           `<div class="ui raised segment">
           <a class="ui red ribbon label">Rules</a>
-          <br><br><p>**Please enjoy this game on a desktop computer using either Chrome or Firefox**</p>
           <h2>Welcome Nerd!</h2>
           <p>If you’re a word enthusiast, then you’ve come to the right place. Form words by typing letters you see on the board and hitting ENTER. Letters do not need to be in order. The letters appear slowly at first, but don’t get too comfortable! As time goes on, the rate of new tiles will get faster and faster. Once the board fills up it’s GAME OVER.</p>
           <p><b>SCORING</b><br>
