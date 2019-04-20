@@ -3,7 +3,7 @@ const sounds = {
 
       playBombSound: () => {
         const bombSound = new Audio()
-        bombSound.src = "https://drive.google.com/uc?export=download&id=1CE0j3fYAEIiQoIP4rvpPHwLk4PnQTnW-"
+        bombSound.src = "https://raw.githubusercontent.com/tzip25/wordy-frontend/master/site/public/sounds/bomb2.mp3"
         bombSound.play()
       },
 
