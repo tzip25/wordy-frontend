@@ -2,20 +2,20 @@
   font-size: 1.5em;
 }
 
+#game-clock-div {
+  width: 9em;
+  display: block;
+  margin-left: 2em;
+  margin-top: 1em;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
 #game-score-div {
   width: 9em;
   display: block;
   margin-top: 1em;
   /* padding-right: -1.5em; */
-  font-weight: bold;
-  font-size: 1.1em;
-}
-
-#game-clock-div {
-  width: 9em;
-  display: block;
-  margin-left: 2.7em;
-  margin-top: 1em;
   font-weight: bold;
   font-size: 1.1em;
 }
@@ -27,7 +27,7 @@
 
 #play-button {
   position: relative;
-  margin-left: 3em;
+  margin-left: 2em;
   width: 52em;
   height: 100%;
   align-self: center;
@@ -35,7 +35,7 @@
 
 #game-container {
   background: #f9f9f9;
-  margin: 1em 1em 1em 3em;
+  margin: 1em 1em 1em 2em;
   width: 52em;
   height: 32em;
   display: grid;
@@ -76,7 +76,7 @@
 
 #word-input-field {
   position: relative;
-  margin: 1em 1em 1em 3em;
+  margin: 1em 1em 1em 2em;
   width: 52em;
 }
 
@@ -86,9 +86,10 @@
 }
 
 #right-container {
-  max-width: 22em;
+  min-width: 15em;
+  max-width: 24em;
   float: left;
-  margin-left: 4em;
+  margin-left: 2em;
   margin-top: 6.5em;
 }
 
@@ -112,7 +113,15 @@
   margin-top: 4em;
 }
 
-/* Place the navbar at the bottom of the page, and make it stick */
+#leaderboard-scores{
+  float: left;
+}
+
+#leaderboard-words{
+  float: left;
+  margin-left: 2em;
+}
+
 #footer {
   background-color: teal;
   overflow: hidden;

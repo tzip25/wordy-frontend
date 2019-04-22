@@ -342,13 +342,13 @@ window.addEventListener('DOMContentLoaded', e => {
       rightContainer.innerHTML =
       `<h2>Leaderboard</h2>
 
-      <div class="ui raised segment">
+      <div id="leaderboard-scores" class="ui raised segment">
       <a class="ui red ribbon label">Highest Scores</a>
       <br><br>
       <span id="high-scores"></span>
       </div>
 
-      <div class="ui raised segment">
+      <div id="leaderboard-words" class="ui raised segment">
       <a class="ui black ribbon label">Longest Words</a>
       <br><br>
       <span id="legendary-words"></span>
@@ -386,7 +386,7 @@ window.addEventListener('DOMContentLoaded', e => {
           const ps = tempDiv.querySelectorAll('p')
           const tempArr = [...ps]
 
-          tempArr.slice(0,5).forEach(p => {
+          tempArr.slice(0,10).forEach(p => {
             highScores.innerHTML += `<p>${p.innerText}</p>`
           })
 
@@ -404,7 +404,7 @@ window.addEventListener('DOMContentLoaded', e => {
 
           if (wordArr[0]) {
             const legendaryWords = document.querySelector('#legendary-words')
-            wordArr.slice(0,5).forEach(word=> {
+            wordArr.slice(0,10).forEach(word=> {
               legendaryWords.innerHTML += `<p>${word}</p>`
             })
           }
